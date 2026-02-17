@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Uploaded files
+public/uploads/*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+dist/
+build/
+
+docker-compose.override.yml
