@@ -1,23 +1,20 @@
 # Node dependencies
 node_modules/
+npm-debug.log*
 
 # Environment variables
 .env
 .env.*
+!.env.example
 
-# Logs
+# Application Logs
 logs/
 *.log
-npm-debug.log*
 
-# Uploaded files
+# User Uploaded Files 
 public/uploads/*
+!public/uploads/.gitkeep
 
 # OS generated files
 .DS_Store
 Thumbs.db
-
-dist/
-build/
-
-docker-compose.override.yml
