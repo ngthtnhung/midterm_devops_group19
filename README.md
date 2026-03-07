@@ -16,13 +16,16 @@ The repository is systematically organized to separate application source code f
 
 ```text
 ├── phase1/
-│   └── scripts/
-│       └── setup.sh              # Bash script for automated server provisioning
+│   ├── scripts/
+│   │   └── setup.sh              # Bash script for automated server provisioning
+│   └── README.md                 # Specific documentation for Phase 1
 ├── phase2/
 │   ├── evidence/                 # Documentation and screenshots of Phase 2 deployment
 │   ├── reverse-proxy-config/     # Nginx server block configurations
-│   └── .env.example              # Environment variable template
+│   ├── .env.example              # Environment variable template
+│   └── README.md                 # Specific documentation for Phase 2
 ├── phase3/
+│   ├── evidence/                 # Documentation and screenshots of Phase 3 deployment
 │   ├── Dockerfile                # Instructions to build the application container image
 │   ├── docker-compose.yml        # Multi-container orchestration configuration
 │   └── README.md                 # Specific documentation for Phase 3
@@ -37,23 +40,33 @@ The repository is systematically organized to separate application source code f
 ├── main.js                       # Application entry point
 ├── package.json                  # Project metadata and dependencies
 └── README.md                     # Comprehensive project documentation
-4. Local Environment Setup
-Install required dependencies:
-npm install
+```
 
-Environment Configuration:
-Copy the provided environment template from the phase2 directory to create your local configuration file.
-cp phase2/.env.example .env
+## 4. Local Environment Setup
 
-Execute the application:
-npm start
+1. Install required dependencies:
+   ```bash
+   npm install
+   ```
 
-5. DevOps Deployment Strategy
-Automation Script (Phase 1)
-Located at phase1/scripts/setup.sh, this Bash automation script is engineered to prepare a pristine Ubuntu Linux environment. It automates the installation of essential system dependencies, including the Node.js runtime, Nginx web server, and PM2 process manager, ensuring a consistent and reproducible server setup prior to deployment.
+2. Environment Configuration:
+   Copy the provided environment template from the phase2 directory to create your local configuration file.
+   ```bash
+   cp phase2/.env.example .env
+   ```
 
-Phase 2: Traditional Cloud Deployment
+3. Execute the application:
+   ```bash
+   npm start
+   ```
+
+## 5. DevOps Deployment Strategy
+
+### Automation Script (Phase 1)
+Located at `phase1/scripts/setup.sh`, this Bash automation script is engineered to prepare a pristine Ubuntu Linux environment. It automates the installation of essential system dependencies, including the Node.js runtime, Nginx web server, and PM2 process manager, ensuring a consistent and reproducible server setup prior to deployment.
+
+### Phase 2: Traditional Cloud Deployment
 The Phase 2 deployment approach utilizes a traditional host-based execution model on an Ubuntu virtual machine. The Node.js application is daemonized using PM2 to ensure process persistence and automatic restarts upon failure. Nginx is configured as a reverse proxy to securely route external HTTP and HTTPS traffic to the internal application port. The server environment is further secured using UFW (Uncomplicated Firewall) and Let's Encrypt SSL/TLS certificates.
 
-Phase 3: Containerization Architecture
-The Phase 3 approach transitions the infrastructure from a host-based model to a containerized architecture using Docker. The application and the MongoDB database are packaged into isolated, portable containers using the provided Dockerfile and orchestrated via a docker-compose.yml configuration. Docker Volumes are implemented to decouple persistent data from the container lifecycle, ensuring absolute data retention for database records and user-uploaded media across container rebuilds.
+### Phase 3: Containerization Architecture
+The Phase 3 approach transitions the infrastructure from a host-based model to a containerized architecture using Docker. The application and the MongoDB database are packaged into isolated, portable containers using the provided `Dockerfile` and orchestrated via a `docker-compose.yml` configuration. Docker Volumes are implemented to decouple persistent data from the container lifecycle, ensuring absolute data retention for database records and user-uploaded media across container rebuilds.
