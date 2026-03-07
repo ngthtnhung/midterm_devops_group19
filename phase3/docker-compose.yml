@@ -1,0 +1,27 @@
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: midterm_mongo
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  web:
+    image: ${WEB_IMAGE:-midterm_web:latest}
+    container_name: midterm_web
+    restart: always
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/products_db
+    depends_on:
+      - mongo
+    volumes:
+      - uploads_data:/usr/src/app/public/uploads
+    ports:
+      - "3000:3000"
+
+volumes:
+  mongo_data:
+  uploads_data:
